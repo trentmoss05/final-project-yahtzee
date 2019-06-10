@@ -13,6 +13,7 @@ class App extends React.Component {
         <Route exact path="/" />
         <Route exact path="/rules" component={Rules} />
         <Route exact path="/about" component={About} />
+        This is the home page
       </div>
     );
   }
