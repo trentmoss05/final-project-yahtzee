@@ -80,5 +80,44 @@ class Rules extends Component {
         "points": ""
       }
     ];
+
+    let rows = sectionPoints.map(x => {
+      return (
+        <tr key={x.section}>
+          <td>{x.section}</td>
+          <td>{x.description}</td>
+          <td>{x.points}</td>
+        </tr>
+      );
+    });
+
+    return (
+      <div className="rules">
+        <h2 className="largeTitle">Yahtzee Rules</h2>
+        <div className="rulesText">
+          <p>
+            Yahtzee is a game of luck and chance. The object of the game is to
+            score the most points possible by rolling 5 dice to make specific
+            combos. There are 13 rounds, and with each round you roll the dice
+            score in one of the categories. Some categories have requirements
+            that must be met.
+          </p>
+
+          <p>
+            All you need to play is 5 six-sided dice, a cup if you want to roll
+            them with, a pencil, and paper to record everyone's scores. You can
+            play alone to see how high of a score you can get, or play against
+            friends. Each player rolls the 5 dice and the highest roll gets to
+            go first.
+          </p>
+
+          <h2>On Your Turn</h2>
+
+          <p />
+        </div>
+      </div>
+    );
   }
 }
+
+export default Rules;
