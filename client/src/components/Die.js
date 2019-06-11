@@ -77,7 +77,7 @@ function Die2() {
   );
 }
 
-function Die6() {
+function Die1() {
   return (
     <g>
       <circle cx="60" cy="60" r="14" />
