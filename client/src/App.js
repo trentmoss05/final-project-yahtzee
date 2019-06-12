@@ -4,15 +4,16 @@ import "./App.css";
 import { Route } from "react-router-dom";
 import Rules from "./components/Rules";
 import About from "./components/About";
-import { rollDie } from "./yahtzee/RollDie";
+import Game from "./yahtzee/Game";
+import Dice from "./components/Dice";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      rolledDice: [3, 3, 3, 3, 3],
-      heldDice: [0, 0, 0, 0, 0],
+      rolledDice: [],
+      heldDice: [],
       scorecard: [
         { label: "Ones", score: 0, filled: false },
         { label: "Twos", score: 0, filled: false },
@@ -31,11 +32,24 @@ class App extends React.Component {
       rollsLeft: 3
       // gameState: GameState.GameOver
     };
-    this.handleRollClick = this.handleRollClick.bind(this);
-    this.holdDie = this.holdDie.bind(this);
-    this.unholdDie = this.unholdDie.bind(this);
-    this.updateDice = this.updateDice.bind(this);
   }
+
+  incRoll = () => {
+    if (this.state.rollsLeft > 0)
+      this.setState({ rollsLeft: --this.state.rollsLeft });
+    else this.setState({ rollsLeft: 3 });
+  };
+
+  rolledDice = rolledDice => {
+    this.setState({ rolledDice });
+  };
+
+  holdDice = die => {
+    if (!this.state.heldDice.includes(die))
+      this.setState({ heldDice: [...this.state.heldDice, die] });
+    else
+      this.setState({ heldDice: this.state.heldDice.filter(d => d !== die) });
+  };
 
   render() {
     return (
@@ -45,6 +59,13 @@ class App extends React.Component {
         <Route exact path="/rules" component={Rules} />
         <Route exact path="/about" component={About} />
         This is the home page
+        <Dice
+          rollsLeft={this.state.rollsLeft}
+          heldDice={this.state.heldDice}
+          incRoll={this.incRoll}
+          rolledDice={this.rolledDice}
+          holdDice={this.holdDice}
+        />
       </div>
     );
   }
